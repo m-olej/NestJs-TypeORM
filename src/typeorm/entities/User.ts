@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'users', schema: 'nestjstypeorm' })
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column({ nullable: true })
@@ -14,7 +14,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: new Date() })
+  @Column({})
   created_at: Date;
 
   @Column()
