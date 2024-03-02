@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Profile } from './Profile';
+import { Posts } from './Posts';
 
 @Entity({ name: 'users', schema: 'nestjstypeorm' })
 export class User {
@@ -19,4 +28,11 @@ export class User {
 
   @Column()
   updated_at: Date;
+
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
+
+  @OneToMany(() => Posts, (post) => post.user)
+  posts: Posts[];
 }
